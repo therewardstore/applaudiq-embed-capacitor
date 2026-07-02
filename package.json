@@ -1,6 +1,6 @@
 {
   "name": "@applaudiq/embed-capacitor",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Capacitor SDK to embed the Applaud IQ recognition portal (auto + manual login, native SSO). Works with plain Capacitor and Ionic React/Angular/Vue.",
   "type": "module",
   "main": "dist/index.cjs",

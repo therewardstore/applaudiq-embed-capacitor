@@ -91,6 +91,7 @@ const MSG = {
   signout: 'applaudiq:signout',
   ssoRequest: 'applaudiq:sso-request',
   ssoResult: 'applaudiq:sso-result',
+  openExternal: 'applaudiq:open-external',
   back: 'applaudiq:back',
 } as const;
 
@@ -505,6 +506,16 @@ class ApplaudIQClient {
           const clientId =
             rawClient == null ? null : typeof rawClient === 'string' ? rawClient : String(rawClient);
           openSSO(provider, clientId, (d.payload?.email as string) || null);
+          break;
+        }
+        case MSG.openExternal: {
+          // Reward-store downloads / payment / OAuth: open the URL in the system browser.
+          const url = typeof d.payload?.url === 'string' ? d.payload.url : '';
+          if (/^https?:\/\//i.test(url)) {
+            void Browser.open({ url }).catch(() => {
+              /* browser open failed — nothing more we can do */
+            });
+          }
           break;
         }
       }

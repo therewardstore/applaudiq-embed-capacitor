@@ -16,7 +16,7 @@ Android **Back** button go through Capacitor's native plugins.
 ## 1. Install
 
 ```bash
-npm install @applaudiq/embed-capacitor@^1.1.1 @capacitor/app @capacitor/browser
+npm install @applaudiq/embed-capacitor@^1.2.0 @capacitor/app @capacitor/browser
 npx cap sync
 ```
 
@@ -109,10 +109,17 @@ opens the IdP in the **system browser** (`@capacitor/browser`) at
 one-time code to `<ssoCallback>?code=` (or `?error=`), `@capacitor/app`'s `appUrlOpen` catches it, and the SDK
 relays it into the embed, which redeems it and reloads — signed in.
 
+## Downloads & external links
+
+When the portal (or the reward store nested inside it) needs to open a URL outside the WebView —
+a file download, a payment page, or an OAuth handoff — it sends the `applaudiq:open-external` bridge
+message with payload `{ url }`. The SDK opens `http(s)` URLs in the **system browser**
+(`@capacitor/browser`). No app code is required; it works out of the box.
+
 ## Test integration
 
 A runnable example ships for each framework in
 [`applaudiq-sdk-example`](https://github.com/therewardstore/applaudiq-sdk-example) under
 `native-integration/capacitor/` (vanilla · react · angular · vue · ionic-react · ionic-angular · ionic-vue).
 
-Latest: **v1.1.1 (LTS)**. See [CHANGELOG.md](./CHANGELOG.md). MIT licensed.
+Latest: **v1.2.0 (LTS)**. See [CHANGELOG.md](./CHANGELOG.md). MIT licensed.
