@@ -16,7 +16,7 @@ Android **Back** button go through Capacitor's native plugins.
 ## 1. Install
 
 ```bash
-npm install @applaudiq/embed-capacitor@^1.2.0 @capacitor/app @capacitor/browser
+npm install @applaudiq/embed-capacitor@^1.3.0 @capacitor/app @capacitor/browser
 npx cap sync
 ```
 
@@ -116,10 +116,22 @@ a file download, a payment page, or an OAuth handoff — it sends the `applaudiq
 message with payload `{ url }`. The SDK opens `http(s)` URLs in the **system browser**
 (`@capacitor/browser`). No app code is required; it works out of the box.
 
+The reward store's **gift-card voucher download** additionally sends `applaudiq:save-file` with payload
+`{ base64, filename, mime }` — the file bytes, since a blob download can't reach disk in a WebView. To
+enable it, install the two **optional** plugins in your app:
+
+```bash
+npm install @capacitor/filesystem @capacitor/share
+npx cap sync
+```
+
+The SDK then writes the file to the app cache and opens the OS share sheet ("Save to Files" / share
+targets). If the plugins aren't installed, voucher downloads are a silent no-op — nothing else is affected.
+
 ## Test integration
 
 A runnable example ships for each framework in
 [`applaudiq-sdk-example`](https://github.com/therewardstore/applaudiq-sdk-example) under
 `native-integration/capacitor/` (vanilla · react · angular · vue · ionic-react · ionic-angular · ionic-vue).
 
-Latest: **v1.2.0 (LTS)**. See [CHANGELOG.md](./CHANGELOG.md). MIT licensed.
+Latest: **v1.3.0 (LTS)**. See [CHANGELOG.md](./CHANGELOG.md). MIT licensed.

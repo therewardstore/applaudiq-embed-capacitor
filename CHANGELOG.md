@@ -7,6 +7,14 @@ All notable changes to `@applaudiq/embed-capacitor` are documented here. This pr
 
 _Nothing yet._
 
+## [1.3.0] — LTS
+
+**Reward-store voucher download.** Adds the `applaudiq:save-file` bridge message (payload
+`{ base64, filename, mime }`): the embedded reward store streams gift-card voucher bytes when a blob
+download can't reach disk in a WebView. The SDK writes the file and opens the OS share sheet via the
+**optional** `@capacitor/filesystem` + `@capacitor/share` plugins — install them (`npx cap sync`) to enable
+it; without them it's a silent no-op. Backward-compatible.
+
 ## [1.2.0] — LTS
 
 **Reward-store downloads / external links.** The SDK now handles the `applaudiq:open-external` bridge message

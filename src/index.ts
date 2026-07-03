@@ -92,6 +92,7 @@ const MSG = {
   ssoRequest: 'applaudiq:sso-request',
   ssoResult: 'applaudiq:sso-result',
   openExternal: 'applaudiq:open-external',
+  saveFile: 'applaudiq:save-file',
   back: 'applaudiq:back',
 } as const;
 
@@ -516,6 +517,35 @@ class ApplaudIQClient {
               /* browser open failed — nothing more we can do */
             });
           }
+          break;
+        }
+        case MSG.saveFile: {
+          // Reward-store voucher download: the embed streamed the file bytes (base64) because a blob
+          // download can't reach disk inside the framed WebView. Persist + share via the OPTIONAL
+          // @capacitor/filesystem + @capacitor/share plugins — no-op if the host app didn't install them.
+          const base64 = typeof d.payload?.base64 === 'string' ? d.payload.base64 : '';
+          const rawName = typeof d.payload?.filename === 'string' ? d.payload.filename : 'download';
+          const filename = rawName.split(/[\\/]/).pop() || 'download'; // basename only (no path traversal)
+          if (!base64) break;
+          void (async () => {
+            try {
+              const fs = await import('@capacitor/filesystem').catch(() => null);
+              const sh = await import('@capacitor/share').catch(() => null);
+              if (!fs?.Filesystem || !sh?.Share) return; // plugins not installed — silently skip
+              await fs.Filesystem.writeFile({
+                path: filename,
+                data: base64,
+                directory: fs.Directory.Cache,
+              });
+              const { uri } = await fs.Filesystem.getUri({
+                path: filename,
+                directory: fs.Directory.Cache,
+              });
+              await sh.Share.share({ url: uri, title: filename });
+            } catch {
+              /* plugin missing / write failed / user cancelled the share sheet — best-effort */
+            }
+          })();
           break;
         }
       }
