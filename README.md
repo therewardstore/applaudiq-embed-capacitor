@@ -16,8 +16,8 @@ Android **Back** button go through Capacitor's native plugins.
 ## 1. Install
 
 ```bash
-npm install @applaudiq/embed-capacitor@^1.3.0 @capacitor/app @capacitor/browser
-npx cap sync
+pnpm add @applaudiq/embed-capacitor@^1.3.0 @capacitor/app @capacitor/browser
+pnpm exec cap sync
 ```
 
 ## 2. Register your SSO callback scheme
@@ -121,8 +121,8 @@ The reward store's **gift-card voucher download** additionally sends `applaudiq:
 enable it, install the two **optional** plugins in your app:
 
 ```bash
-npm install @capacitor/filesystem @capacitor/share
-npx cap sync
+pnpm add @capacitor/filesystem @capacitor/share
+pnpm exec cap sync
 ```
 
 The SDK then writes the file to the app cache and opens the OS share sheet ("Save to Files" / share
