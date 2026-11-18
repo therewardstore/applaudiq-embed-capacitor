@@ -16,7 +16,7 @@ Android **Back** button go through Capacitor's native plugins.
 ## 1. Install
 
 ```bash
-pnpm add @applaudiq/embed-capacitor@^1.3.0 @capacitor/app @capacitor/browser
+pnpm add @applaudiq/embed-capacitor@^1.4.0 @capacitor/app @capacitor/browser
 pnpm exec cap sync
 ```
 
@@ -135,7 +135,7 @@ A runnable example ships for each framework in
 [`applaudiq-sdk-example`](https://github.com/therewardstore/applaudiq-sdk-example) under
 `native-integration/capacitor/` (vanilla · react · angular · vue · ionic-react · ionic-angular · ionic-vue).
 
-Latest: **v1.3.0 (LTS)**. See [CHANGELOG.md](./CHANGELOG.md). MIT licensed.
+Latest: **v1.4.0 (LTS)**. See [CHANGELOG.md](./CHANGELOG.md). MIT licensed.
 
 ## CI
 
